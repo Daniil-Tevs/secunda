@@ -1,10 +1,28 @@
 <?php
 
-namespace App\Models;
+  namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+  use Illuminate\Database\Eloquent\Factories\HasFactory;
+  use Illuminate\Database\Eloquent\Model;
+  use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Building extends Model
-{
-    //
-}
+  class Building extends Model
+  {
+    use HasFactory;
+
+    protected $fillable = [
+      'is_active',
+      'sort',
+      'name',
+      'address',
+      'latitude',
+      'longitude',
+    ];
+
+    public $timestamps = false;
+
+    public function organization(): HasMany
+    {
+      return $this->hasMany(Organization::class, 'building_id');
+    }
+  }

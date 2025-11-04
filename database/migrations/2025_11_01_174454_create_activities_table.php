@@ -18,7 +18,7 @@
 
         $table->string('name');
 
-        $table->foreignId('parent_id')->constrained('activities')->cascadeOnUpdate()->cascadeOnDelete();
+        $table->foreignId('parent_id')->nullable()->constrained('activities')->cascadeOnUpdate()->cascadeOnDelete();
       });
     }
 

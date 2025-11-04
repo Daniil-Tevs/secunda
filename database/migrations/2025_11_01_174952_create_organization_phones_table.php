@@ -13,7 +13,7 @@
       Schema::create('organization_phones', function (Blueprint $table) {
         $table->id();
 
-        $table->string('phone', 30);
+        $table->string('number', 30);
 
         $table->foreignId('organization_id')->constrained('organizations')->cascadeOnUpdate()->cascadeOnDelete();
       });

@@ -10,11 +10,10 @@
      */
     public function up(): void
     {
-      Schema::create('users', function (Blueprint $table) {
+      Schema::create('organization_activities', function (Blueprint $table) {
         $table->id();
-        $table->string('name');
-        $table->string('email')->unique();
-        $table->string('api_token', 20)->unique();
+        $table->foreignId('activity_id')->constrained('activities')->cascadeOnUpdate()->cascadeOnDelete();
+        $table->foreignId('organization_id')->constrained('organizations')->cascadeOnUpdate()->cascadeOnDelete();
       });
     }
 
@@ -23,6 +22,6 @@
      */
     public function down(): void
     {
-      Schema::dropIfExists('users');
+      Schema::dropIfExists('organization_activities');
     }
   };
