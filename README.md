@@ -1,41 +1,42 @@
-# FindSport — Sports Venue Booking API
+# Secunda — Organizations Directory API
 
-REST API for booking time slots at a sports venue.
-Supports multi-slot bookings, conflict detection, and token-based auth.
+REST API for a directory of organizations, buildings, and activity categories.
+Supports geo-search, tree-structured activity classification, and API key auth.
 
 ## Features
 
-- Token-based authentication (api_token, no Passport/Sanctum)
-- Create bookings with multiple time slots
-- Add or update slots on existing bookings
-- Time conflict detection (system-wide, not per user)
-- PHPUnit tests covering core booking logic
+- Static API key authentication
+- Organizations linked to buildings and activity categories
+- Tree-structured activities (up to 3 levels deep)
+- Geo-search: find organizations within a radius or bounding box
+- Search by organization name and activity type (includes nested categories)
+- Docker support for easy local setup
+- Swagger UI / ReDoc documentation
 
 ## Tech Stack
 
-PHP 8 · Laravel · PostgreSQL · PHPUnit
+PHP 8 · Laravel · PostgreSQL · Docker · Swagger
 
 ## API Endpoints
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
-| GET | /api/bookings | List user's bookings |
-| POST | /api/bookings | Create booking with slots |
-| POST | /api/bookings/{booking}/slots | Add slot to booking |
-| PATCH | /api/bookings/{booking}/slots/{slot} | Update a slot |
-| DELETE | /api/bookings/{booking} | Delete booking |
+| GET | /api/organizations | List by building or activity |
+| GET | /api/organizations/{id} | Organization details |
+| GET | /api/organizations/search | Search by name or activity |
+| GET | /api/organizations/nearby | Geo-search by radius or bbox |
 
 ## Getting Started
 
 ```bash
-git clone https://github.com/Daniil-Tevs/find_sport.git
-cd find_sport
+git clone https://github.com/Daniil-Tevs/secunda.git
+cd secunda
 cp .env.example .env
-composer install
-php artisan key:generate
+docker-compose up -d
 php artisan migrate --seed
-php artisan serve
 ```
+
+API docs available at `/api/documentation` after startup.
 
 ## Testing
 
